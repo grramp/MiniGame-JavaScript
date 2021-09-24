@@ -36,21 +36,35 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const grid = document.querySelector('.grid');
     const resultDisplay = document.getElementById("result");
 
+    var canPick = true;
     var cardsChosen = [];
     var cardsChosenId = [];
     var cardsWon = [];
 
+    //Shuffle Cards
+    function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+
     //creating board
     function CreateBoard(){
-        for(let i = 0; i < 2; i++){
-            for(let j = 0; j < cardArray.length; j++){
+        cardArray.forEach( (cardElement) => {
+            cardArray.push(cardElement);
+        })
+        console.log(cardArray);
+        shuffleArray(cardArray);
+            for(let i = 0; i < cardArray.length; i++){
                 var card = document.createElement('img');
                 card.setAttribute('src', 'img/blank.png');
-                card.setAttribute('data-id', i * cardArray.length + j);
+                card.setAttribute('data-id', i);
                 card.addEventListener('click', flipCard)
                 grid.appendChild(card);
             }
-        }
     }
 
     //check matches
@@ -73,13 +87,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
         //reset arrays to chose other cards
         cardsChosen = [];
         cardsChosenId = [];
+        canPick = true;
         resultDisplay.innerText = cardsWon.length;
     }
 
     //flip cards
     function flipCard(){
         var cardId = this.getAttribute('data-id');
-        if(cardId != cardsChosenId[0] && this.getAttribute('src') != "img/white.png") {
+        if(cardId != cardsChosenId[0] && this.getAttribute('src') != "img/white.png" && canPick) {
             cardsChosenId.push(cardId);
         }
         else{
@@ -94,7 +109,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
         this.setAttribute('src', cardArray[cardId].img)
 
         if(cardsChosen.length >= 2) {
-            setTimeout(checkForMatch, 850)
+            canPick = false;
+            setTimeout(checkForMatch, 750)
         }
     }
 
