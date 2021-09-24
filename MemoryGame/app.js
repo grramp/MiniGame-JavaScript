@@ -4,32 +4,32 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const cardArray = [
         {
             name: 'pic1',
-            img: 'img/pic1.png'
+            img: 'MemoryGame/img/pic1.png'
         },
 
         {
             name: 'pic2',
-            img: 'img/pic2.png'
+            img: 'MemoryGame/img/pic2.png'
         },
 
         {
             name: 'pic3',
-            img: 'img/pic3.png'
+            img: 'MemoryGame/img/pic3.png'
         },
 
         {
             name: 'pic4',
-            img: 'img/pic4.png'
+            img: 'MemoryGame/img/pic4.png'
         },
 
         {
             name: 'pic5',
-            img: 'img/pic5.png'
+            img: 'MemoryGame/img/pic5.png'
         },
 
         {
             name: 'pic6',
-            img: 'img/pic6.png'
+            img: 'MemoryGame/img/pic6.png'
         }
     ]
 
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         shuffleArray(cardArray);
             for(let i = 0; i < cardArray.length; i++){
                 var card = document.createElement('img');
-                card.setAttribute('src', 'img/blank.png');
+                card.setAttribute('src', 'MemoryGame/img/blank.png');
                 card.setAttribute('data-id', i);
                 card.addEventListener('click', flipCard)
                 grid.appendChild(card);
@@ -75,13 +75,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
         //if it they are the same cards
         if(cardsChosen[0] == cardsChosen[1] && optionOne != optionTwo){
-            cards[optionOne].setAttribute('src', 'img/white.png');
-            cards[optionTwo].setAttribute('src', 'img/white.png')
+            cards[optionOne].setAttribute('src', 'MemoryGame/img/white.png');
+            cards[optionTwo].setAttribute('src', 'MemoryGame/img/white.png')
             cardsWon.push(cardsChosen);
         }
         else {
-            cards[optionOne].setAttribute('src', 'img/blank.png');
-            cards[optionTwo].setAttribute('src', 'img/blank.png');
+            cards[optionOne].setAttribute('src', 'MemoryGame/img/blank.png');
+            cards[optionTwo].setAttribute('src', 'MemoryGame/img/blank.png');
         }
 
         //reset arrays to chose other cards
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     //flip cards
     function flipCard(){
         var cardId = this.getAttribute('data-id');
-        if(cardId != cardsChosenId[0] && this.getAttribute('src') != "img/white.png" && canPick) {
+        if(cardId != cardsChosenId[0] && this.getAttribute('src') != "MemoryGame/img/white.png" && canPick) {
             cardsChosenId.push(cardId);
         }
         else{
